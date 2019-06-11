@@ -267,3 +267,29 @@ Feel free to join the `#keras-retinanet` [Keras Slack](https://keras-slack-autoj
 * 4. Convert your training model to an inference model.
 * 5. Evaluate your inference model on your test or validation set.
 * 6. Profit!
+
+
+## For Challenge
+### Setup model 
+    - Assuming name virtualenv is `.venv`
+    ```
+    $ virtualenv .venv -p python3
+    $ source .venv/bin/activate
+    (.venv) $ pip install .  
+    ```
+### Transform the annotation with xml format to csv
+    - This will create `annotation.csv` with xmls
+    - You will need to create `classes.csv` by yourself 
+    ```
+    $ python xml2csv.py --label_path /path/to/annotation_xmls --images_path /path/to/JPEGImages
+    ```
+### Train model
+    - Full fine-tuning w/ custom datasets
+    ```
+    $ python keras_retinanet/bin/train.py --gpu 0 --epochs 10000 csv /path/to/annotation.csv /path/to/classes.csv
+    ```
+    
+    - Last layer fine-tuning w/ custom datasets(TBD)
+    ```
+    $ python keras_retinanet/bin/train.py --freeze-backbon --gpu 0 --epochs 10000 csv /path/to/annotation.csv /path/to/classes.csv
+    ```
