@@ -60,6 +60,8 @@ def transform_xml_to_csv1(image_path, label_path):
 
 def transform_xml_to_csv(image_path, label_path):
     fout = open(label_path + '/../annotation.csv', 'wt')
+    items = glob.glob(image_path + '/*')
+
     for file_name in sorted(os.listdir(label_path)):
         file_path = os.path.join(label_path, file_name)
 
@@ -71,7 +73,8 @@ def transform_xml_to_csv(image_path, label_path):
             image_path = os.path.abspath(image_path)
             # print('name ====> '+file_name)
             # print('imgpath ====> ' + image_path)
-            for item in glob.glob(image_path + '/*'):
+
+            for item in items:
                 # print('item ====> ' + item)
                 if file_name in item:
                     # path = os.path.abspath(file)
