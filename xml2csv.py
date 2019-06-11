@@ -92,7 +92,7 @@ def transform_xml_to_csv(image_path, label_path):
                             fout.write(str(transform))
                             fout.flush()
                             # print(transform)
-                break
+                    break
         except:
             print('Mal-formed file : {} - {}'.format(file_path, root))
 
