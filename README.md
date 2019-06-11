@@ -293,3 +293,7 @@ Feel free to join the `#keras-retinanet` [Keras Slack](https://keras-slack-autoj
    ```
    (.venv)$ python keras_retinanet/bin/train.py --freeze-backbon --gpu 0 --epochs 10000 csv /path/to/annotation.csv /path/to/classes.csv
    ```
+   
+   - You can find the trained weight on the `./snapshots` directory
+   
+### Happy Hacking :)
