@@ -33,6 +33,7 @@ def transform_xml_to_csv(image_path, label_path):
             # path = root.find('path').text.split('\\')
             # path = image_path + '/' + path[len(path) - 1]
             path = image_path + '/' + path.replace('xml', 'jpg')
+            path = os.path.abspath(path)
             # print('path : {}'.format(path.text))
 
             for obj in root.findall('object'):
