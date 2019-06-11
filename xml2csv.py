@@ -2,6 +2,7 @@ import os
 import argparse
 import xml.etree.ElementTree
 
+
 # /data/imgs/img_001.jpg,837,346,981,456,cow
 # /data/imgs/img_002.jpg,215,312,279,391,cat
 # /data/imgs/img_002.jpg,22,5,89,84,bird
@@ -22,7 +23,7 @@ import xml.etree.ElementTree
 
 
 def transform_xml_to_csv(image_path, label_path):
-    fout = open(label_path+'/../annotation.csv', 'wt')
+    fout = open(label_path + '/../annotation.csv', 'wt')
     for path in sorted(os.listdir(label_path)):
         file_path = os.path.join(label_path, path)
 
@@ -38,14 +39,16 @@ def transform_xml_to_csv(image_path, label_path):
                 name = obj.find('name')
                 # print('name : {}'.format(name.text))
                 box = obj.find('bndbox')
-                transform = '{fname},{x1},{y1},{x2},{y2},{class_name}\n'.format(fname=path,
-                                                                                x1=box.find('xmin').text,
-                                                                                y1=box.find('ymin').text,
-                                                                                x2=box.find('xmax').text,
-                                                                                y2=box.find('ymax').text,
-                                                                                class_name=name.text)
-                fout.write(str(transform))
-                fout.flush()
+                if int(box.find('xmin').text) < int(box.find('xmax').text) and int(box.find('ymin').text) < int(
+                        box.find('ymax').text):
+                    transform = '{fname},{x1},{y1},{x2},{y2},{class_name}\n'.format(fname=path,
+                                                                                    x1=box.find('xmin').text,
+                                                                                    y1=box.find('ymin').text,
+                                                                                    x2=box.find('xmax').text,
+                                                                                    y2=box.find('ymax').text,
+                                                                                    class_name=name.text)
+                    fout.write(str(transform))
+                    fout.flush()
                 # print(transform)
         except:
             print('Mal-formed file : {} - {}'.format(file_path, root))
